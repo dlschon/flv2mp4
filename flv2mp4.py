@@ -25,11 +25,13 @@ for subdir, dirs, files in os.walk(input_dir):
 			output_subdir = subdir.replace(input_dir, output_dir);
 			output_path = os.path.join(output_subdir, file).replace('.flv', '.mp4')
 			
-			
-			if not os.path.exists(output_subdir):
-				os.makedirs(output_subdir)
+			if os.path.isfile(output_path):
+				print('mp4 already exists. Skipping...')
+			else:
+				if not os.path.exists(output_subdir):
+					os.makedirs(output_subdir)
 	
-			# Call ffmpeg with the appropriate arguments
-			os.system('ffmpeg -i ' + path + ' ' + output_path)
+				# Call ffmpeg with the appropriate arguments
+				os.system('ffmpeg -i ' + path + ' ' + output_path)
 			
 			
